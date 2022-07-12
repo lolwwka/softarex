@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${DBLogin}
+    password: ${DBPass}
+    url: jdbc:postgresql://localhost:5432/postgres
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 20
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+server:
+  servlet:
+    context-path: /softarex
+  port: ${PORT:8080}
+server-mail:
+  password: ${MailPass}
+  login: ${MailLogin}
+  host: ${MailHost}
+  port: ${MailPort}
