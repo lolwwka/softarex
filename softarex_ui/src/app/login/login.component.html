@@ -1,0 +1,44 @@
+<section class="h-100 gradient-form">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10 mh-100 mw-100">
+          <div class="row g-0">
+            <div class="col-lg-6 mh-100 bg-light text-center m-lg-auto">
+              <div class="card-body p-md-5 mx-md-4">
+                <div class="text-center">
+                  <h2 class="mt-1 mb-5 pb-1 bg-transparent">Log In</h2>
+                </div>
+
+                <form class="mh-100">
+                  <label class="form-label" for="email">Email</label>
+                  <div class="form-outline mb-4">
+                    <input [(ngModel)]="credentials.email" name="email" type="email" id="email" class="form-control"
+                           placeholder="Email address" />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="password">Password</label>
+                    <input [(ngModel)]="credentials.password" name="password" type="password" id="password" class="form-control"
+                           placeholder="Password" />
+
+                  </div>
+
+                  <div class="text-center pt-1 mb-2 pb-1">
+                    <button class="btn btn-primary btn-block mb-3" style="--bs-btn-padding-x: 10rem" type="button"
+                            (click)="login()">Log in</button>
+                    <br>
+                    <mat-checkbox class="me-2" (change)="change()" [(ngModel)]="checkBox.check" [color]="checkBox.color">Remember me</mat-checkbox>
+                    <a class="text-decoration-none" href="#!">Forgot your password?</a>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Don't have an account?</p>
+                    <a class="text-decoration-none" [routerLink]="['/register']">Sign Up</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>

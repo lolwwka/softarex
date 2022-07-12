@@ -1,0 +1,62 @@
+<section class="h-100 gradient-form">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10 mh-100 mw-100">
+        <div class="row g-0">
+          <div class="col-lg-6 mh-100 bg-light text-center m-lg-auto">
+            <div class="card-body p-md-5 mx-md-4">
+              <div class="text-center">
+                <h2 class="mt-1 mb-3 pb-1 ">Sign Up</h2>
+              </div>
+
+              <form class="mh-100">
+                <div class="form-outline mb-3">
+                  <input [(ngModel)]="credentials.email" name="email" type="email" id="email" class="form-control"
+                         placeholder="Email*" />
+                </div>
+
+                <div class="form-outline mb-3">
+                  <input [(ngModel)]="credentials.password" name="password" type="password" id="password" class="form-control"
+                         placeholder="Password*" />
+                </div>
+
+                <div class="form-outline mb-3">
+                  <input [(ngModel)]="credentials.confirmPassword" name="confirmPass" type="password" id="confirmPassword"
+                         class="form-control" placeholder="Confirm password*" />
+                </div>
+
+                <div class="form-outline mb-3">
+                  <input [(ngModel)]="credentials.firstName" name="firstName" type="text" id="firstName" class="form-control"
+                         placeholder="First Name"/>
+                </div>
+
+                <div class="form-outline mb-3">
+                  <input [(ngModel)]="credentials.lastName" name="lastName" type="text" id="lastName" class="form-control"
+                         placeholder="Last Name"/>
+                </div>
+
+                <div class="form-outline mb-3">
+                  <input [(ngModel)]="credentials.phoneNumber" name="phoneNumber" type="text" id="phoneNumber"
+                         class="form-control" placeholder="Phone Number"/>
+                </div>
+                <div *ngIf="error">
+                  <br>
+                  <p class="mb-2 text-danger">{{error}}</p>
+                </div>
+                <div class="text-center pt-1 mb-2 pb-1">
+                  <button class="btn btn-primary btn-lg btn-block" style="--bs-btn-padding-x: 10rem" type="button" (click)="register()">
+                    Register</button>
+                  <br>
+                </div>
+                <div class="d-flex align-items-center justify-content-center pb-4">
+                  <p class="mb-0 me-2">Already have account ?</p>
+                  <a class="text-decoration-none" [routerLink]="['/login']">Log in</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
