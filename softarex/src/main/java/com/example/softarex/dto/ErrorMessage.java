@@ -3,6 +3,7 @@ package com.example.softarex.dto;
 import java.util.List;
 
 public class ErrorMessage {
+
     private String message;
     private List<String> details;
 

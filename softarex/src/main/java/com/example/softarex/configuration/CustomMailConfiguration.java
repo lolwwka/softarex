@@ -11,9 +11,10 @@ import com.example.softarex.properties.MailProperties;
 
 @Configuration
 public class CustomMailConfiguration {
+
     private final MailProperties mailProperties;
 
-    public CustomMailConfiguration(MailProperties mailProperties){
+    public CustomMailConfiguration(MailProperties mailProperties) {
         this.mailProperties = mailProperties;
     }
 

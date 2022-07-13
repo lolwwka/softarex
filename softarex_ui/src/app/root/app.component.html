@@ -20,7 +20,7 @@
         <button value="user menu" id="button" type="button" mat-button [matMenuTriggerFor]="userActions">{{userName()}}</button>
         <mat-menu #userActions="matMenu">
           <button mat-menu-item [routerLink]="['/user/' + userId() + '/edit']">Edit Profile</button>
-          <button mat-menu-item>Change Password</button>
+          <button mat-menu-item [routerLink]="['/user/' + userId() + '/passChange']" >Change Password</button>
           <button mat-menu-item (click)="logOut()">Log Out</button>
         </mat-menu>
       </mat-grid-tile>

@@ -11,6 +11,7 @@ import {MainComponent} from "../main/main.component";
 import {LoginComponent} from "../login/login.component";
 import {RegisterComponent} from "../register/register.component";
 import {EditProfileComponent} from "../edit_profile/edit_profile.component";
+import {ChangePassComponent} from "../change_pass/change_pass.component";
 
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
@@ -22,6 +23,8 @@ import {FormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {CookieService} from 'ngx-cookie-service';
 import {MatMenuModule} from "@angular/material/menu";
+import {ForgotPassComponent} from "../forgot_pass/forgot_pass.component";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -37,7 +40,8 @@ const routes: Routes = [
   {path: '', pathMatch: 'full', component: MainComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'user/:id/edit', component: EditProfileComponent}
+  {path: 'user/:id/edit', component: EditProfileComponent},
+  {path: 'user/:id/passChange', component: ChangePassComponent}
 ]
 @NgModule({
   declarations: [
@@ -45,22 +49,25 @@ const routes: Routes = [
     MainComponent,
     LoginComponent,
     RegisterComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ChangePassComponent,
+    ForgotPassComponent
   ],
-    imports: [
-        RouterModule.forRoot(routes),
-        BrowserModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatListModule,
-        MatButtonModule,
-        MatGridListModule,
-        MatInputModule,
-        MatIconModule,
-        FormsModule,
-        MatCheckboxModule,
-        MatMenuModule
-    ],
+  imports: [
+    RouterModule.forRoot(routes),
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatListModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatInputModule,
+    MatIconModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    MatDialogModule
+  ],
   providers: [AppService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}, CookieService],
   bootstrap: [AppComponent]
 })

@@ -25,6 +25,7 @@ import org.springframework.validation.annotation.Validated;
 @Entity
 @Table(name = "\"user\"")
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")

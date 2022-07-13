@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.softarex.properties.MailProperties;
 
 @Service
-public class MailServiceImpl implements MailService{
+public class MailServiceImpl implements MailService {
+
     private final JavaMailSender mailSender;
     private final MailProperties mailProperties;
 
@@ -20,11 +21,10 @@ public class MailServiceImpl implements MailService{
     }
 
     @Override
-    public boolean sendRegistrationMail(String userMail) throws MessagingException {
-        String htmlMessage = "<h3>You have been successfully registered at softarex</h3> ";
+    public boolean sendMail(String userMail, String message, String subject) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
-        mimeMessage.setContent(htmlMessage, "text/html");
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+        mimeMessage.setContent(message, "text/html");
         helper.setFrom("<" + mailProperties.getLogin() + ">");
         helper.setTo(userMail + "<" + userMail + ">");
         helper.setSubject("Registration notification");

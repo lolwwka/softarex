@@ -4,46 +4,40 @@
       <div class="col-xl-10 mh-100 mw-100">
         <div class="row g-0 ">
           <div class="col-lg-6 mh-100 bg-light text-center m-lg-auto">
-            <div class="card-body p-md-5 mx-md-2" style="margin-top: -3vh">
+            <div class="card-body p-md-5 mx-md-2">
               <div class="text-start">
-                <h2 class="mt-1 mb-1 pb-1 bg-transparent unselected">Edit Profile</h2>
+                <h2 class="mt-1 mb-1 pb-1 bg-transparent unselected">Change Password</h2>
               </div>
               <hr>
               <form class="mh-100">
                 <div class="text-start mb-1 ms-1 unselected opacity-50">
-                  <p>First Name</p>
+                  <p>Current Password*</p>
                 </div>
                 <div class="form-outline mb-2 ">
-                  <input [(ngModel)]="user.firstName" name="firstName" type="text" class="form-control"
-                         placeholder="First Name" />
+                  <input [type]="passTypes.currentPass" [(ngModel)]="passInfo.currentPass" name="currentPass"
+                         class="form-control"/>
                 </div>
                 <div class="text-start mb-1 ms-1 unselected opacity-50">
-                  <p>Last Name</p>
+                  <p>New Password</p>
                 </div>
                 <div class="form-outline mb-2 ">
-                  <input [(ngModel)]="user.lastName" name="lastName" type="text" class="form-control"
-                         placeholder="Last Name" />
+                  <input [(ngModel)]="passInfo.newPass" name="newPass" [type]="passTypes.newPass" class="form-control"/>
                 </div>
                 <div class="text-start mb-1 ms-1 unselected opacity-50">
-                  <p>Email*</p>
+                  <p>Confirm New Password</p>
                 </div>
                 <div class="form-outline mb-2 ">
-                  <input [(ngModel)]="user.email" name="email" type="text" class="form-control"
-                         placeholder="Email"/>
+                  <input [(ngModel)]="passInfo.newPassConfirm" name="newPassConfirm" [type]="passTypes.newPassConfirm"
+                         class="form-control"/>
                 </div>
-                <div class="text-start mb-1 ms-1 unselected opacity-50">
-                  <p>Phone Number</p>
-                </div>
-                <div class="form-outline mb-1 ">
-                  <input [(ngModel)]="user.phoneNumber" name="phoneNumber" type="text" class="form-control"
-                         placeholder="Phone Number"/>
+                <div class="text-start mb-1 ms-1 unselected ">
+                  <label><input type="checkbox" class="password-checkbox" (change)="changeCurrentPass()">Show passes</label>
                 </div>
                 <div *ngIf="errorMsg != null">
                   <p class="text-warning">{{errorMsg}}</p>
                 </div>
                 <div class="text-start pt-1 pb-1">
-                  <button class="btn btn-primary btn-block mb-3" style="--bs-btn-padding-x: 10rem" type="button" (click)="update()"
-                          >Save</button>
+                  <button class="btn btn-primary btn-block mb-3" style="--bs-btn-padding-x: 10rem" type="button" (click)="updatePass()">Save</button>
                   <br>
                 </div>
               </form>

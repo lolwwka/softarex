@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 @Table(name = "role")
 public class Role implements GrantedAuthority {
+
     @Id
     private long id;
     private String name;

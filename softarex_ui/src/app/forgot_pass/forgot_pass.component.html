@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Password recovery</h1>
+<div mat-dialog-content>
+  <div>
+    <p>Input there you're email and you will recieve a new password to you're account</p>
+      <div class="text-start mb-1 ms-1 unselected opacity-50">
+        <p>Email</p>
+      </div>
+      <div class="form-outline mb-4">
+        <input [(ngModel)]="data.email" name="email" type="email" id="email" class="form-control"
+               placeholder="Email address" />
+      </div>
+  </div>
+</div>
+<div mat-dialog-actions class="ms-2">
+  <button class="me-4 btn btn-lg btn-block btn-primary" style="width: 8rem" (click)="back()">Back</button>
+  <button class="btn btn-primary btn-lg btn-block"  style="width: 8rem"
+           [mat-dialog-close]="data.email">Submit</button>
+</div>
+<div *ngIf="errorMsg != null">
+  <p class="text-warning">{{errorMsg}}</p>
+</div>

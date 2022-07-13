@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @ConfigurationProperties("server-mail")
 public class MailProperties {
+
     @NotBlank
     private String password;
     @NotBlank

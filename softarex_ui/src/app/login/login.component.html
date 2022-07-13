@@ -27,8 +27,12 @@
                     <button class="btn btn-primary btn-block mb-3" style="--bs-btn-padding-x: 10rem" type="button"
                             (click)="login()">Log in</button>
                     <br>
+                    <div *ngIf="errorMsg!= null">
+                      <p class="text-warning">{{errorMsg}}</p>
+                    </div>
+                    <br>
                     <mat-checkbox class="me-2" (change)="change()" [(ngModel)]="checkBox.check" [color]="checkBox.color">Remember me</mat-checkbox>
-                    <a class="text-decoration-none" href="#!">Forgot your password?</a>
+                    <a class="text-decoration-none unselected" (click)="openDialog()">Forgot your password?</a>
                   </div>
                   <div class="d-flex align-items-center justify-content-center pb-4">
                     <p class="mb-0 me-2">Don't have an account?</p>
