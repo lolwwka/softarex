@@ -5,7 +5,14 @@ import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Validated
+@Getter
+@Setter
+@NoArgsConstructor
 public class NewPassDto {
 
     @NotBlank(message = "Current pass can't be empty")
@@ -16,20 +23,5 @@ public class NewPassDto {
     @Size(min = 5, message = "Password must be more 5 symbols")
     private String newPass;
 
-    public String getCurrentPass() {
-        return currentPass;
-    }
-
-    public void setCurrentPass(String currentPass) {
-        this.currentPass = currentPass;
-    }
-
-    public String getNewPass() {
-        return newPass;
-    }
-
-    public void setNewPass(String newPass) {
-        this.newPass = newPass;
-    }
 }
 

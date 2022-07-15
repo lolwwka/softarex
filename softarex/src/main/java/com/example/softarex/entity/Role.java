@@ -10,7 +10,14 @@ import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "role")
 public class Role implements GrantedAuthority {
 
@@ -21,40 +28,8 @@ public class Role implements GrantedAuthority {
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
-    public Role() {
-    }
-
     public Role(long id) {
         this.id = id;
-    }
-
-    public Role(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 
     @Override
