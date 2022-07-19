@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.softarex.converter.DtoConverter;
+import com.example.softarex.converter.UserDtoConverter;
 import com.example.softarex.dto.UserDto;
 import com.example.softarex.entity.User;
-import com.example.softarex.exception.custom.EmailInUseException;
 import com.example.softarex.service.user.UserService;
 
 @RestController
@@ -25,8 +24,8 @@ public class RegisterController {
     }
 
     @PostMapping()
-    public Boolean registerUser(@Valid @RequestBody UserDto userDto) throws EmailInUseException, MessagingException {
-        User user = DtoConverter.convertUserDtoToUser(userDto);
+    public Boolean registerUser(@Valid @RequestBody UserDto userDto) throws RuntimeException, MessagingException {
+        User user = UserDtoConverter.convertUserDtoToUser(userDto);
         userService.saveUser(user);
         return Boolean.TRUE;
     }

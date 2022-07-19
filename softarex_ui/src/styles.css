@@ -36,6 +36,9 @@ html, body{
     border-bottom-right-radius: .3rem;
   }
 }
+.mat-dialog-container {
+  padding: 0px !important;
+}
 
 
 html, body { height: 100%; }

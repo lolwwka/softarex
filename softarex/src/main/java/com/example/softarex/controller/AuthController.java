@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.softarex.converter.DtoConverter;
+import com.example.softarex.converter.UserDtoConverter;
 import com.example.softarex.dto.UserDto;
 import com.example.softarex.entity.User;
 import com.example.softarex.exception.custom.IncorrectMailException;
@@ -23,9 +23,9 @@ public class AuthController {
     }
 
     @PostMapping
-    public UserDto authenticate(Principal principal) throws IncorrectMailException {
+    public UserDto authenticate(Principal principal) throws RuntimeException {
         User user = userService.getByEmail(principal.getName());
-        UserDto userDto = DtoConverter.convertUserToDto(user);
+        UserDto userDto = UserDtoConverter.convertUserToDto(user);
         return userDto;
     }
 }

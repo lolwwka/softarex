@@ -25,6 +25,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {MatMenuModule} from "@angular/material/menu";
 import {ForgotPassComponent} from "../forgot_pass/forgot_pass.component";
 import {MatDialogModule} from "@angular/material/dialog";
+import {CreateFieldComponent} from "../create_field/create_field.component";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -51,7 +52,8 @@ const routes: Routes = [
     RegisterComponent,
     EditProfileComponent,
     ChangePassComponent,
-    ForgotPassComponent
+    ForgotPassComponent,
+    CreateFieldComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

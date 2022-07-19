@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "role")
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "role")
 public class Role implements GrantedAuthority {
 
     @Id

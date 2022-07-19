@@ -1,6 +1,5 @@
 package com.example.softarex.properties;
 
-
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,18 +11,10 @@ import lombok.Setter;
 
 @Configuration
 @Validated
-@ConfigurationProperties("server-mail")
+@ConfigurationProperties("server-ui")
 @Getter
 @Setter
-public class MailProperties {
-
+public class UiProperties {
     @NotBlank
-    private String password;
-    @NotBlank
-    private String login;
-    @NotBlank
-    private String host;
-    @NotBlank
-    private String port;
-
+    private String url;
 }

@@ -26,11 +26,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Validated
+@Table(name = "\"user\"")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "\"user\"")
 public class User implements UserDetails {
 
     @Id

@@ -1,3 +1,50 @@
-<div>
-  <p>You are Logged kekis</p>
+<div class=" py-5">
+  <div class="card mx-auto" style="width: 180vh">
+    <div class="text-start card-header bg-white">
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item border-0 mt-2">Fields</li>
+        <li class="list-group-item border-0" style="margin-left: 140vh">
+          <button class="btn btn-primary" type="button" (click)="openDialog()">
+            <i class="bi-plus-lg"></i>Add Field
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Label</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Is Active</th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+          <ng-container *ngFor="let field of fields">
+            <tbody>
+            <tr>
+              <th>{{field.label}}</th>
+              <th>{{field.type}}</th>
+              <th>{{field.required}}</th>
+              <th>{{field.active}}</th>
+              <th>
+                <button class="btn btn-primary" type="button">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </th>
+              <th>
+                <button class="btn btn-primary" type="button">
+                  <i class="bi-trash3" style="font-size: 20px"></i>
+                </button>
+              </th>
+            </tr>
+            </tbody>
+          </ng-container>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

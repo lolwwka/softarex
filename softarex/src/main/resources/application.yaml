@@ -1,8 +1,8 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: ${DBLogin}
-    password: ${DBPass}
+    username: ${DB_LOGIN}
+    password: ${DB_PASS}
     url: jdbc:postgresql://localhost:5432/postgres
     hikari:
       minimum-idle: 10
@@ -19,7 +19,9 @@ server:
     context-path: /softarex
   port: ${PORT:8080}
 server-mail:
-  password: ${MailPass}
-  login: ${MailLogin}
-  host: ${MailHost}
-  port: ${MailPort}
+  password: ${MAIL_PASS}
+  login: ${MAIL_LOGIN}
+  host: ${MAIL_HOST}
+  port: ${MAIL_PORT}
+server-ui:
+  url : ${UI_URL}

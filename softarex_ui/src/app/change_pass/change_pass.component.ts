@@ -28,7 +28,7 @@ export class ChangePassComponent{
       this.errorMsg = "Passwords not equals"
       return
     }
-    this.http.put(environment.apiUrl + "/user/" + this.app.user.id + "/changePass", {
+    this.http.put(environment.apiUrl + "/user/" + this.app.user.id + "/pass", {
       currentPass: this.passInfo.currentPass,
       newPass: this.passInfo.newPass
     }, {withCredentials: true})

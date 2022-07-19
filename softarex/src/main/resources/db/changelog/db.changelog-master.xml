@@ -32,5 +32,7 @@
         </createTable>
     </changeSet>
     <include file="db/changelog/v.1.0.0/main.xml"/>
+    <include file="db/changelog/v.1.0.1/main.xml"/>
+    <include file="db/changelog/v.1.0.2/main.xml"/>
 
 </databaseChangeLog>

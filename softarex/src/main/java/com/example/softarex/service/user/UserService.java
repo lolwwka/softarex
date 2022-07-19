@@ -1,13 +1,14 @@
 package com.example.softarex.service.user;
 
 import javax.mail.MessagingException;
-import javax.transaction.Transactional;
+
 
 import com.example.softarex.entity.User;
 import com.example.softarex.exception.custom.EmailInUseException;
 import com.example.softarex.exception.custom.IncorrectIdException;
 import com.example.softarex.exception.custom.IncorrectMailException;
 import com.example.softarex.exception.custom.IncorrectUserPassException;
+import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface UserService {

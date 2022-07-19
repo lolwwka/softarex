@@ -1,0 +1,61 @@
+<div class="card">
+  <form>
+    <div class="card-header bg-white">
+      <ul class="list-group w-100 list-group-horizontal">
+        <li class="list-group-item border-0 mt-1 h5" style="margin-left: -3vh">Add Field</li>
+        <li class="list-group-item border-0 text-end" style="margin-left: 27vh">
+          <button class="btn" type="button" (click)="back()">
+            <i class="bi-x-lg"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body bg-white">
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item border-0 opacity-50 mt-2 h6">Label</li>
+        <li class="list-group-item border-0">
+          <input [(ngModel)]="data.label" type="text" name="label" type="text" id="label" class="form-control"
+                 placeholder="Label">
+        </li>
+      </ul>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item border-0 opacity-50 mt-2 h6">Type</li>
+        <li class="list-group-item border-0 mx-1">
+          <select #typeList (change)="changeType($event)" [(ngModel)]="data.type" class="form-select" id="type">
+            <option *ngFor='let choice of typeChoices'>
+              {{choice}}
+            </option>
+          </select>
+        </li>
+      </ul>
+      <div *ngIf="typeList.selectedIndex === typeList.options.length - 2">
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item border-0 opacity-50 mt-2 h6">Options</li>
+          <li class="list-group-item border-0">
+            <textarea class="form-control" rows="4"></textarea>
+          </li>
+        </ul>
+      </div>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item border-0 mt-2">
+          <mat-checkbox (change)="changeRequired()" [(ngModel)]="data.required"></mat-checkbox>
+        </li>
+        <li class="list-group-item border-0 opacity-50 mt-2 h6">Required</li>
+        <li class="list-group-item border-0 mt-2">
+          <mat-checkbox (change)="changeIsActive()" [(ngModel)]="data.active"></mat-checkbox>
+        </li>
+        <li class="list-group-item border-0 opacity-50 mt-2 h6">Is Active</li>
+      </ul>
+    </div>
+    <div class="card-footer bg-white">
+      <ul class="list-group list-group-horizontal text-end w-100">
+        <li class="list-group-item border-0">
+          <button class="btn" type="button" (click)="back()">Cancel</button>
+        </li>
+        <li class="list-group-item border-0">
+          <button class="btn btn-primary" type="button" [mat-dialog-close]="returnTrue()">Submit</button>
+        </li>
+      </ul>
+    </div>
+  </form>
+</div>
