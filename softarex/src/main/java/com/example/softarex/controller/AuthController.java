@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.softarex.converter.UserDtoConverter;
 import com.example.softarex.dto.UserDto;
 import com.example.softarex.entity.User;
-import com.example.softarex.exception.custom.IncorrectMailException;
+import com.example.softarex.constants.routs.AuthControllerRouts;
 import com.example.softarex.service.user.UserService;
 
 @RestController
-@RequestMapping("/authentication")
+@RequestMapping(AuthControllerRouts.MAIN_ROUT)
 public class AuthController {
 
     private final UserService userService;

@@ -4,7 +4,7 @@
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item border-0 mt-2">Fields</li>
         <li class="list-group-item border-0" style="margin-left: 140vh">
-          <button class="btn btn-primary" type="button" (click)="openDialog()">
+          <button class="btn btn-primary" type="button" (click)="openDialog(null)">
             <i class="bi-plus-lg"></i>Add Field
           </button>
         </li>
@@ -31,12 +31,12 @@
               <th>{{field.required}}</th>
               <th>{{field.active}}</th>
               <th>
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="button" (click)="openDialog(field.id)">
                   <mat-icon>edit</mat-icon>
                 </button>
               </th>
               <th>
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="button" (click)="deleteField(field.id)">
                   <i class="bi-trash3" style="font-size: 20px"></i>
                 </button>
               </th>

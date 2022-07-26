@@ -11,6 +11,7 @@ public class FieldDtoConverter {
         fieldDto.setType(field.getType());
         fieldDto.setActive(field.isActive());
         fieldDto.setRequired(field.isRequired());
+        fieldDto.setOptions(field.getOptions());
         return fieldDto;
     }
 
@@ -21,6 +22,7 @@ public class FieldDtoConverter {
         field.setLabel(fieldDto.getLabel());
         field.setType(fieldDto.getType());
         field.setRequired(fieldDto.isRequired());
+        field.setOptions(fieldDto.getOptions());
         return field;
     }
 

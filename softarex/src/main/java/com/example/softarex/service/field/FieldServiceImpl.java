@@ -3,10 +3,13 @@ package com.example.softarex.service.field;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.softarex.entity.Field;
+import com.example.softarex.exception.custom.IncorrectIdException;
 import com.example.softarex.repository.FieldRepository;
 
+@Transactional
 @Service
 public class FieldServiceImpl implements FieldService{
     private final FieldRepository fieldRepository;
@@ -21,13 +24,23 @@ public class FieldServiceImpl implements FieldService{
     }
 
     @Override
-    public boolean deleteField() {
-        return false;
+    public void deleteField(long id) {
+        fieldRepository.findById(id).ifPresentOrElse( field -> {
+            fieldRepository.delete(field);
+            fieldRepository.flush();
+        }, () ->{
+            throw new IncorrectIdException("Field with that id don't exists");
+        });
     }
 
     @Override
-    public Field updateField() {
-        return null;
+    public Field updateField(Field field) {
+        fieldRepository.findById(field.getId()).ifPresentOrElse( field1 -> fieldRepository.updateFieldInfoById(field.isActive(),
+            field.getLabel(), field.isRequired(), field.getType(),field.getOptions(), field.getId()),
+            () -> {
+            throw new IncorrectIdException("Field with that id don't exists");
+        });
+        return fieldRepository.findById(field.getId()).get();
     }
 
     @Override
@@ -37,6 +50,11 @@ public class FieldServiceImpl implements FieldService{
 
     @Override
     public Field getField(long id) {
-        return null;
+        return fieldRepository.findById(id).orElseThrow(() -> new IncorrectIdException("Field with that id don't exists"));
+    }
+
+    @Override
+    public List<Field> getAllActive() {
+        return fieldRepository.findAllByActiveTrue();
     }
 }

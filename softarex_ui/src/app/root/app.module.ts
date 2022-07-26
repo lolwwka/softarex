@@ -26,6 +26,12 @@ import {MatMenuModule} from "@angular/material/menu";
 import {ForgotPassComponent} from "../forgot_pass/forgot_pass.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {CreateFieldComponent} from "../create_field/create_field.component";
+import {CreateResponseComponent} from "../create_response/create_response.component";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatSelectModule} from "@angular/material/select";
+import {ConfirmResponseComponent} from "../confirm_response/confirm_response.component";
+import {ResponseTableComponent} from "../response_table/response_table.component";
+import {WebSocketAPI} from "../websocket/websocket.api";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -42,7 +48,10 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'user/:id/edit', component: EditProfileComponent},
-  {path: 'user/:id/passChange', component: ChangePassComponent}
+  {path: 'user/:id/passChange', component: ChangePassComponent},
+  {path: 'questionnaires/:id', component: CreateResponseComponent},
+  {path: 'confirm', component: ConfirmResponseComponent},
+  {path: 'response', component: ResponseTableComponent}
 ]
 @NgModule({
   declarations: [
@@ -53,23 +62,28 @@ const routes: Routes = [
     EditProfileComponent,
     ChangePassComponent,
     ForgotPassComponent,
-    CreateFieldComponent
+    CreateFieldComponent,
+    CreateResponseComponent,
+    ConfirmResponseComponent,
+    ResponseTableComponent,
   ],
-  imports: [
-    RouterModule.forRoot(routes),
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatListModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatInputModule,
-    MatIconModule,
-    FormsModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatDialogModule
-  ],
+    imports: [
+        RouterModule.forRoot(routes),
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatListModule,
+        MatButtonModule,
+        MatGridListModule,
+        MatInputModule,
+        MatIconModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatMenuModule,
+        MatDialogModule,
+        MatRadioModule,
+        MatSelectModule,
+    ],
   providers: [AppService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}, CookieService],
   bootstrap: [AppComponent]
 })

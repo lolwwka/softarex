@@ -1,0 +1,23 @@
+<div class=" py-5">
+  <div class="card mx-auto" style="width: 180vh">
+    <div class="text-start card-header bg-white">
+      <p class="h3 mt-2">Responses</p>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th *ngFor="let field of fields">{{field.label}}</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let userAnswer of fixedUserAnswers">
+              <th *ngFor="let answer of userAnswer">{{answer}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

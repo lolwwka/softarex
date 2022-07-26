@@ -1,0 +1,118 @@
+<section class="h-100 gradient-form">
+  <div class="container py-5 h-100 ">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10 mh-100 mw-100">
+        <div class="row g-0 ">
+          <div class="col-lg-6 mh-100 bg-light text-center m-lg-auto bg-white">
+            <div class="card-body p-md-5 mx-md-4 " style= "overflow-y: scroll; max-height: 80vh">
+              <form class="mh-100">
+                <div class="mb-2">
+                  <ul class="list-group">
+                    <li class="list-group-item border-0" *ngFor="let field of singleLineTextData">
+                      <div class="text-start mb-1 ms-1 unselected opacity-50">
+                        <p *ngIf="field.required == true">{{field.label}}*</p>
+                        <p *ngIf="field.required != true">{{field.label}}</p>
+                      </div>
+                      <div class="form-outline mb-2 ">
+                        <input [(ngModel)]="field.answer" type="text" name="{{field.label}}" id="{{field.label}}" class="form-control"/>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mb-2">
+                  <ul class="list-group">
+                    <li class="list-group-item border-0" *ngFor="let field of multilineTextData">
+                      <div class="text-start mb-1 ms-1 unselected opacity-50">
+                        <p *ngIf="field.required == true">{{field.label}}*</p>
+                        <p *ngIf="field.required != true">{{field.label}}</p>
+                      </div>
+                      <div class="form-outline mb-2 ">
+                        <textarea [(ngModel)]="field.answer" name="message" class="form-control" rows="4"></textarea>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mb-2">
+                  <ul class="list-group">
+                    <li class="list-group-item border-0" *ngFor="let field of radioButtonData">
+                      <div class="text-start mb-0 ms-1 unselected opacity-50">
+                        <p *ngIf="field.required == true">{{field.label}}*</p>
+                        <p *ngIf="field.required != true">{{field.label}}</p>
+                      </div>
+                      <div class="form-outline mb-2 d-flex ms-1" *ngFor="let option of field.options">
+                        <input type="radio" id="{{field}}" name="{{field}}"
+                               [value]="option" [(ngModel)]="field.answer">{{option}}
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mb-2">
+                  <ul class="list-group">
+                    <li class="list-group-item border-0" *ngFor="let field of checkboxData">
+                      <div class="text-start mb-0 ms-1 unselected opacity-50">
+                        <p *ngIf="field.required == true">{{field.label}}*</p>
+                        <p *ngIf="field.required != true">{{field.label}}</p>
+                      </div>
+                      <div class="form-outline mb-2 d-flex ms-1">
+                        <input
+                               id="saveUserNameCheckBox"
+                               type="checkbox"
+                               [checked]="field.answer"
+                               (change)="field.answer = !field.answer" />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mb-2">
+                  <ul class="list-group">
+                    <li class="list-group-item border-0" *ngFor="let field of dateData">
+                      <div class="text-start mb-0 ms-1 unselected opacity-50">
+                        <p *ngIf="field.required == true">{{field.label}}*</p>
+                        <p *ngIf="field.required != true">{{field.label}}</p>
+                      </div>
+                      <div class="form-outline mb-2 d-flex ms-1">
+                        <input [(ngModel)]="field.answer" (ngModelChange)="field.answer" type="date" name="{{field.answer}}">
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mb-2">
+                  <ul class="list-group">
+                    <li class="list-group-item border-0" *ngFor="let field of comboboxData">
+                      <div class="text-start mb-0 ms-1 unselected opacity-50">
+                        <p *ngIf="field.required == true">{{field.label}}*</p>
+                        <p *ngIf="field.required != true">{{field.label}}</p>
+                      </div>
+                      <div class="form-outline mb-2 d-flex ms-1">
+                        <select [(ngModel)]="field.answer" name="option" class="form-select" aria-label="Default select example">
+                          <option *ngFor="let option of field.options" [value]="option">
+                            {{option}}
+                          </option>
+                        </select>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div *ngIf="errorMsg!= null">
+                  <p class="text-warning">{{errorMsg}}</p>
+                </div>
+                <div class="text-center pt-1 mb-2 pb-1">
+                  <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item border-0">
+                      <button class="btn btn-primary btn-lg mb-3" type="button"
+                              (click)="clear()">Clear</button>
+                    </li>
+                    <li class="list-group-item border-0">
+                      <button class="btn btn-primary btn-lg mb-3" type="button"
+                              (click)="submit()">Submit</button>
+                    </li>
+                  </ul>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -14,8 +14,11 @@ export class CreateFieldComponent{
     "Combobox",
     "Date"
   ]
+  deletedType : any;
   constructor(public dialogRef: MatDialogRef<CreateFieldComponent>,@Inject(MAT_DIALOG_DATA) public data: DialogData) {
-
+    this.typeChoices.forEach((element, index)=>{
+      if(element == data.type) this.deletedType = this.typeChoices.splice(index,1);
+    })
   }
 
   back(){

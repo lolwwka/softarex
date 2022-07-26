@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean saveUser(User user) throws RuntimeException, MessagingException {
+    public void saveUser(User user) throws RuntimeException, MessagingException {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new EmailInUseException(String.format("Email: %s , already using by another user", user.getEmail()));
         }
@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         mailService.sendMail(user.getEmail(), MailMessageTemplates.REGISTER.getMailMessage(), MailMessageTemplates.REGISTER.getMailSubject());
-        return true;
     }
 
     @Override
@@ -48,15 +47,17 @@ public class UserServiceImpl implements UserService {
         if (getByEmail(user.getEmail()).getId() != user.getId()) {
             throw new EmailInUseException(String.format("Email: %s , already using by another user", user.getEmail()));
         }
-        userRepository.setUserInfoById(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber(),
-            user.getId());
+        userRepository.findById(user.getId()).ifPresentOrElse(user1 -> userRepository.setUserInfoById(user.getEmail(), user.getFirstName()
+            , user.getLastName(), user.getPhoneNumber(), user.getId()), () -> {
+            throw new IncorrectIdException("User with that id don't exists");
+        });
     }
 
     @Override
 
     public void changePass(long userId, String currentPass, String newPass) throws RuntimeException, MessagingException {
         User user = userRepository.findById(userId).orElseThrow(() -> new IncorrectIdException("Server problems"));
-        if(!bCryptPasswordEncoder.matches(currentPass,user.getPassword())){
+        if (!bCryptPasswordEncoder.matches(currentPass, user.getPassword())) {
             throw new IncorrectUserPassException("Incorrect current password ");
         }
         user.setPassword(bCryptPasswordEncoder.encode(newPass));
@@ -70,17 +71,10 @@ public class UserServiceImpl implements UserService {
         int rightLimit = 122;
         int targetStringLength = 10;
         Random random = new Random();
-        String newPass = random.ints(leftLimit, rightLimit + 1)
-            .limit(targetStringLength)
-            .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-            .toString();
+        String newPass = random.ints(leftLimit, rightLimit + 1).limit(targetStringLength).collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
         User user = getByEmail(email);
         user.setPassword(bCryptPasswordEncoder.encode(newPass));
-        String userMail = new StringBuffer()
-            .append(MailMessageTemplates.PASS_RECOVERY.getMailMessage())
-            .append("<p>")
-            .append(newPass)
-            .append("</p>").toString();
+        String userMail = new StringBuffer().append(MailMessageTemplates.PASS_RECOVERY.getMailMessage()).append("<p>").append(newPass).append("</p>").toString();
         userRepository.save(user);
         mailService.sendMail(email, userMail, MailMessageTemplates.PASS_RECOVERY.getMailSubject());
     }

@@ -1,8 +1,6 @@
 package com.example.softarex.converter;
 
-import com.example.softarex.dto.FieldDto;
 import com.example.softarex.dto.UserDto;
-import com.example.softarex.entity.Field;
 import com.example.softarex.entity.User;
 
 public class UserDtoConverter {
@@ -17,7 +15,6 @@ public class UserDtoConverter {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setPhoneNumber(userDto.getPhoneNumber());
-        user.setPassword(userDto.getPassword());
         return user;
     }
 

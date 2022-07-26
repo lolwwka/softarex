@@ -14,7 +14,7 @@ import com.example.softarex.converter.UserDtoConverter;
 import com.example.softarex.dto.NewPassDto;
 import com.example.softarex.dto.UserDto;
 import com.example.softarex.entity.User;
-import com.example.softarex.routs.UserControllerRouts;
+import com.example.softarex.constants.routs.UserControllerRouts;
 import com.example.softarex.service.user.UserService;
 
 @RestController
@@ -37,7 +37,7 @@ public class UserController {
         return userDto;
     }
 
-    @PutMapping(value = "/{id}/" + UserControllerRouts.PASS_CHANGE)
+    @PutMapping(value = "/{id}" + UserControllerRouts.PASS_CHANGE)
     public void updateUserPass(@PathVariable long id, @Valid @RequestBody NewPassDto newPassDto) throws RuntimeException, MessagingException {
         userService.changePass(id, newPassDto.getCurrentPass(), newPassDto.getNewPass());
     }

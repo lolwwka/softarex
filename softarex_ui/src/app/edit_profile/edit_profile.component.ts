@@ -16,7 +16,6 @@ export class EditProfileComponent{
   }
   update(){
     this.http.put(environment.apiUrl + "/user/" + this.user.id, {
-      password: '12345',
       email: this.user.email,
       firstName: this.user.firstName,
       lastName: this.user.lastName,

@@ -19,6 +19,7 @@ public class FieldDto {
     private String label;
     @NotBlank
     private String type;
+    private String options;
     private boolean required;
     private boolean active;
 }

@@ -21,6 +21,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 
+import com.example.softarex.constants.validation.Patterns;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,7 +45,7 @@ public class User implements UserDetails {
     private String password;
     private String firstName;
     private String lastName;
-    @Pattern(regexp = "^$|^[+]?[(]?[0-9]{3}[)]?[-\\s.]?[0-9]{3}[-\\s.]?[0-9]{4,6}$")
+    @Pattern(regexp = Patterns.PHONE)
     private String phoneNumber;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",

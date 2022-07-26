@@ -5,7 +5,6 @@ import {CookieService} from "ngx-cookie-service";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -46,5 +45,12 @@ export class AppComponent {
   }
   userId(){
     return this.app.user.id;
+  }
+  createQuestionnaire(){
+    let lastId : any;
+    this.http.get(environment.apiUrl + '/questionnaires/lastId').subscribe(data =>{
+      lastId = data;
+      this.router.navigateByUrl('/questionnaires/' + lastId);
+    })
   }
 }

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface UserService {
 
-    boolean saveUser(User user) throws EmailInUseException, MessagingException;
+    void saveUser(User user) throws EmailInUseException, MessagingException;
 
     User getByEmail(String email) throws IncorrectMailException;
 

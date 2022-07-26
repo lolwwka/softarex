@@ -19,6 +19,7 @@ import com.example.softarex.dto.ErrorMessage;
 import com.example.softarex.exception.custom.EmailInUseException;
 import com.example.softarex.exception.custom.IncorrectIdException;
 import com.example.softarex.exception.custom.IncorrectMailException;
+import com.example.softarex.exception.custom.IncorrectQuestionnaireInputException;
 import com.example.softarex.exception.custom.IncorrectUserPassException;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
@@ -38,6 +39,12 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
     @ExceptionHandler(IncorrectMailException.class)
     public ResponseEntity<Object> handleMailException(IncorrectMailException exception){
+        ErrorMessage errorMessage = new ErrorMessage(exception.getMessage());
+        return new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IncorrectQuestionnaireInputException.class)
+    public ResponseEntity<Object> handleQuestionnaireException(IncorrectQuestionnaireInputException exception){
         ErrorMessage errorMessage = new ErrorMessage(exception.getMessage());
         return new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
     }

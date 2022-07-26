@@ -9,8 +9,9 @@ import com.example.softarex.entity.Field;
 @Transactional
 public interface FieldService {
     Field createField(Field field);
-    boolean deleteField();
-    Field updateField();
+    void deleteField(long id);
+    Field updateField(Field field);
     List<Field> getAll();
     Field getField(long id);
+    List<Field> getAllActive();
 }

@@ -2,7 +2,6 @@ import {Component} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {environment} from "../../environments/environment";
-import {Validators} from "@angular/forms";
 
 @Component({
   templateUrl: 'register.component.html'
