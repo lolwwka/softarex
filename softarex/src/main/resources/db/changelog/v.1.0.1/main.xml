@@ -2,7 +2,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet id="create-table-field" author="VaskovskyAS">
+    <changeSet id="modify-table-field" author="VaskovskyAS">
         <createTable tableName="field">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
@@ -13,8 +13,12 @@
             <column name="type" type="varchar">
                 <constraints nullable="false"/>
             </column>
-            <column name="required" type="boolean"/>
-            <column name="active" type="boolean"/>
+            <column name="required" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="boolean">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 
