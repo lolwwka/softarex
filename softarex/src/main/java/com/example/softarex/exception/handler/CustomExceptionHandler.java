@@ -1,5 +1,6 @@
 package com.example.softarex.exception.handler;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,28 +38,35 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorMessage errorMessage = new ErrorMessage(exception.getMessage());
         return new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(IncorrectMailException.class)
-    public ResponseEntity<Object> handleMailException(IncorrectMailException exception){
+    public ResponseEntity<Object> handleMailException(IncorrectMailException exception) {
         ErrorMessage errorMessage = new ErrorMessage(exception.getMessage());
         return new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(IncorrectQuestionnaireInputException.class)
-    public ResponseEntity<Object> handleQuestionnaireException(IncorrectQuestionnaireInputException exception){
+    public ResponseEntity<Object> handleQuestionnaireException(IncorrectQuestionnaireInputException exception) {
         ErrorMessage errorMessage = new ErrorMessage(exception.getMessage());
         return new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(IncorrectUserPassException.class)
-    public ResponseEntity<Object> handleIncorrectPassException(IncorrectUserPassException exception){
+    public ResponseEntity<Object> handleIncorrectPassException(IncorrectUserPassException exception) {
         ErrorMessage errorMessage = new ErrorMessage(exception.getMessage());
         return new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MessagingException.class)
-    public ResponseEntity<Object> handleMessageServerException(MessagingException exception){
+    public ResponseEntity<Object> handleMessageServerException(MessagingException exception) {
         ErrorMessage errorMessage = new ErrorMessage("Problems with mail service");
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(InvalidParameterException.class)
+    public ResponseEntity<Object> handleInvalidParameterException(InvalidParameterException exception) {
+        ErrorMessage errorMessage = new ErrorMessage(exception.getMessage());
+        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 
     @Override

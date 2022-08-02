@@ -32,6 +32,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {ConfirmResponseComponent} from "../confirm_response/confirm_response.component";
 import {ResponseTableComponent} from "../response_table/response_table.component";
 import {WebSocketAPI} from "../websocket/websocket.api";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -83,6 +84,7 @@ const routes: Routes = [
         MatDialogModule,
         MatRadioModule,
         MatSelectModule,
+        MatPaginatorModule,
     ],
   providers: [AppService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}, CookieService],
   bootstrap: [AppComponent]

@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.softarex.constants.routs.RegisterControllerRouts;
 import com.example.softarex.converter.UserCredentialsDtoConverter;
 import com.example.softarex.dto.UserCredentialsDto;
 import com.example.softarex.entity.User;
-import com.example.softarex.constants.routs.RegisterControllerRouts;
 import com.example.softarex.service.user.UserService;
 
 @RestController

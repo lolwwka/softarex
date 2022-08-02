@@ -22,6 +22,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class UserCredentialsDto {
+
     private long id;
     @Email(message = Message.EMAIL)
     private String email;

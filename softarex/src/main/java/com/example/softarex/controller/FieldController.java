@@ -14,56 +14,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.softarex.constants.routs.FieldControllerRouts;
 import com.example.softarex.converter.FieldDtoConverter;
 import com.example.softarex.dto.FieldDto;
 import com.example.softarex.entity.Field;
-import com.example.softarex.constants.routs.FieldControllerRouts;
 import com.example.softarex.service.field.FieldService;
 
 @RestController
 @RequestMapping(FieldControllerRouts.MAIN_ROUT)
 public class FieldController {
+
     private final FieldService fieldService;
 
     public FieldController(FieldService fieldService) {
         this.fieldService = fieldService;
     }
 
-    @GetMapping()
-    private List<FieldDto> getAll(){
+    @GetMapping(value = FieldControllerRouts.GET_ALL)
+    private List<FieldDto> getAll(@PathVariable int offset, @PathVariable int limit) {
         List<FieldDto> dtoList = new ArrayList<>();
-        for(Field field : fieldService.getAll()){
+        for (Field field : fieldService.getAll(offset, limit)) {
             dtoList.add(FieldDtoConverter.convertFieldToDto(field));
         }
         return dtoList;
     }
 
-    @GetMapping(value = FieldControllerRouts.ACTIVE_FIELDS)
-    private List<FieldDto> getAllActiveFields(){
-        List<FieldDto> dtoList = new ArrayList<>();
-        for (Field field : fieldService.getAllActive()){
-            dtoList.add(FieldDtoConverter.convertFieldToDto(field));
-        }
-        return dtoList;
+    @GetMapping(value = FieldControllerRouts.FIELD_COUNT)
+    private long getFieldCount() {
+        return fieldService.getFieldCount();
     }
 
     @PostMapping
-    private FieldDto createField(@Valid @RequestBody FieldDto fieldDto){
+    private FieldDto createField(@Valid @RequestBody FieldDto fieldDto) {
         return FieldDtoConverter.convertFieldToDto(fieldService.createField(FieldDtoConverter.convertFieldDtoToField(fieldDto)));
     }
 
-    @PutMapping(value = "/{id}")
-    private FieldDto updateField(@PathVariable long id, @Valid @RequestBody FieldDto fieldDto){
+    @PutMapping(value = FieldControllerRouts.PATH_ID)
+    private FieldDto updateField(@PathVariable long id, @Valid @RequestBody FieldDto fieldDto) {
         fieldDto.setId(id);
         return FieldDtoConverter.convertFieldToDto(fieldService.updateField(FieldDtoConverter.convertFieldDtoToField(fieldDto)));
     }
 
-    @GetMapping(value = "/{id}")
-    private FieldDto getField(@PathVariable long id){
+    @GetMapping(value = FieldControllerRouts.PATH_ID)
+    private FieldDto getField(@PathVariable long id) {
         return FieldDtoConverter.convertFieldToDto(fieldService.getField(id));
     }
-    @DeleteMapping(value = "/{id}")
-    private void deleteField(@PathVariable long id){
+
+    @DeleteMapping(value = FieldControllerRouts.PATH_ID)
+    private void deleteField(@PathVariable long id) {
         fieldService.deleteField(id);
     }
 }

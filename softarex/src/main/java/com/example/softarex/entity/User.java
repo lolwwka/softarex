@@ -33,12 +33,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
     @Email
     private String email;
     @NotBlank

@@ -1,7 +1,6 @@
 package com.example.softarex.filter;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.Filter;
@@ -41,9 +40,9 @@ public class CustomCorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Headers",
             "Origin, X-Requested-With, Content-Type, Accept, Key, Authorization, Login");
 
-        if ( request.getMethod().equals("OPTIONS") ) {
-            response.setHeader( "Access-Control-Max-Age", "86400" );
-            response.setStatus( HttpServletResponse.SC_OK );
+        if (request.getMethod().equals("OPTIONS")) {
+            response.setHeader("Access-Control-Max-Age", "86400");
+            response.setStatus(HttpServletResponse.SC_OK);
             return;
         }
         else {

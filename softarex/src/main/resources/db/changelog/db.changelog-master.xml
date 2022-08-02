@@ -24,15 +24,18 @@
         </createTable>
         <createTable tableName="user_roles">
             <column name="user_id" type="bigint">
-                <constraints nullable="false" primaryKey="true" foreignKeyName="user_roles_user_id_user_id" references="user(id)"/>
+                <constraints nullable="false" primaryKey="true" foreignKeyName="user_roles_user_id_user_id"
+                             references="user(id)"/>
             </column>
             <column name="role_id" type="bigint">
-                <constraints nullable="false" primaryKey="true" foreignKeyName="user_roles_role_id_role_id" references="role(id)" />
+                <constraints nullable="false" primaryKey="true" foreignKeyName="user_roles_role_id_role_id"
+                             references="role(id)"/>
             </column>
         </createTable>
     </changeSet>
     <include file="db/changelog/v.1.0.0/main.xml"/>
-    <include file="db/changelog/v.1.0.1/main.xml"/>
     <include file="db/changelog/v.1.0.2/main.xml"/>
-
+    <include file="db/changelog/v.1.0.5/main.xml"/>
+    <include file="db/changelog/v.1.0.6/main.xml"/>
+    <include file="db/changelog/v.1.0.7/main.xml"/>
 </databaseChangeLog>

@@ -15,6 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UiProperties {
+
     @NotBlank
     private String url;
 }

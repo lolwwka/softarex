@@ -17,7 +17,7 @@ export class CreateResponseComponent {
   checkboxData : Array<any> = [];
   comboboxData : Array<any> = [];
   dateData : Array<any> = [];
-  response : Array<any> = [];
+  response : any;
   errorMsg : any;
   responseId : any;
   webSocket : WebSocketAPI;
@@ -25,7 +25,7 @@ export class CreateResponseComponent {
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
     this.webSocket = new WebSocketAPI(new ResponseTableComponent(this.http));
     this.responseId = this.route.snapshot.paramMap.get('id');
-    this.response = [];
+    this.response = null;
     this.webSocket._connect();
     http.get(environment.apiUrl + "/questionnaires/" + this.responseId).toPromise().then( (data : any) =>{
       this.serverData = data;
@@ -68,27 +68,28 @@ export class CreateResponseComponent {
       })
   }
   submit(){
+    let userCashAnswers = Array<any>();
     this.singleLineTextData.forEach(data => {
-      this.response.push({id : data.id, answer : data.answer, required : data.required});
+      userCashAnswers.push({fieldId : data.id, answer : data.answer, required : data.required});
     })
     this.multilineTextData.forEach(data => {
-      this.response.push({id : data.id, answer : data.answer, required : data.required});
+      userCashAnswers.push({fieldId : data.id, answer : data.answer, required : data.required});
     })
     this.radioButtonData.forEach(data => {
-      this.response.push({id : data.id, answer : data.answer, required : data.required});
+      userCashAnswers.push({fieldId : data.id, answer : data.answer, required : data.required});
     })
     this.dateData.forEach(data => {
-      this.response.push({id : data.id, answer : data.answer, required : data.required});
+      userCashAnswers.push({fieldId : data.id, answer : data.answer, required : data.required});
     })
     this.checkboxData.forEach(data => {
-      this.response.push({id : data.id, answer : data.answer, required : data.required});
+      userCashAnswers.push({fieldId : data.id, answer : data.answer, required : data.required});
     })
     this.comboboxData.forEach(data => {
-      this.response.push({id : data.id, answer : data.answer, required : data.required});
+      userCashAnswers.push({fieldId : data.id, answer : data.answer, required : data.required});
     })
-    this.http.post(environment.apiUrl + '/questionnaires/' + this.responseId, this.response).toPromise().then( ()=>{
-      this.webSocket._send(this.response);
-      this.response = [];
+    this.http.post(environment.apiUrl + '/questionnaires/' + this.responseId, {"userCashAnswers" : userCashAnswers}).toPromise().then( ()=>{
+      this.webSocket._send(this.responseId);
+      this.response = null;
       this.router.navigateByUrl('/confirm')
     })
       .catch((response : any) =>{
@@ -96,7 +97,7 @@ export class CreateResponseComponent {
           this.errorMsg = response.error.details[0];
         }
         else this.errorMsg = response.error.message;
-        this.response = [];
+        this.response = null;
       })
   }
 

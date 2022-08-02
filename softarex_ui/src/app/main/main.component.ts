@@ -3,6 +3,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {CreateFieldComponent} from "../create_field/create_field.component";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {PageEvent} from '@angular/material/paginator';
 
 export interface DialogData {
   label: string,
@@ -17,7 +18,7 @@ type Field = {
   type : string,
   required : boolean,
   active : boolean,
-  options : any
+  options : any,
 }
 
 @Component({
@@ -26,11 +27,33 @@ type Field = {
 })
 
 export class MainComponent {
+  length : any;
+  pageSize = 5;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  index = 0;
   fields: Field[] = []
   errorMsg = ''
 
   constructor(private dialog: MatDialog, private http: HttpClient) {
-    this.getAllFields();
+    this.getAllFields(this.index, this.pageSize);
+    this.getFieldsLength();
+  }
+  getFieldsLength(){
+    this.http.get(environment.apiUrl + "/field/totalNum", {withCredentials: true}).subscribe(data => this.length = data)
+  }
+
+  public getServerData(event:PageEvent){
+    this.pageSize = event.pageSize;
+    this.index = event.pageIndex
+    this.getAllFields(this.index, this.pageSize)
+  }
+
+  getAllFields(offset : number, limit : number){
+    this.http.get(environment.apiUrl + "/field/" + offset + "/" + limit, {withCredentials: true})
+      .toPromise()
+      .then((result : any) =>{
+        this.fields = result;
+      })
   }
 
   openDialog(id : any) {
@@ -62,7 +85,7 @@ export class MainComponent {
         }, {withCredentials: true})
           .toPromise()
           .then(() => {
-            this.getAllFields();
+            this.getAllFields(this.index, this.pageSize);
           })
           .catch((response: any) => {
             if (response.error.details != null) {
@@ -92,7 +115,8 @@ export class MainComponent {
         }, {withCredentials: true})
           .toPromise()
           .then(() => {
-            this.getAllFields();
+            this.getFieldsLength();
+            this.getAllFields(this.index, this.pageSize);
           })
           .catch((response: any) => {
             if (response.error.details != null) {
@@ -107,15 +131,8 @@ export class MainComponent {
   }
   deleteField(id : number){
     this.http.delete(environment.apiUrl + "/field/" + id, {withCredentials: true}).subscribe( () =>{
-      this.getAllFields();
+      this.getAllFields(this.index, this.pageSize);
+      this.getFieldsLength();
     })
-  }
-
-  getAllFields(){
-    this.http.get(environment.apiUrl + "/field", {withCredentials: true})
-      .toPromise()
-      .then((result : any) =>{
-        this.fields = result;
-      })
   }
 }

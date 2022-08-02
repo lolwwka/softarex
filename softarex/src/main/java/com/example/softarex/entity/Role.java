@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role implements GrantedAuthority {
+public class Role implements GrantedAuthority{
 
     @Id
     private long id;

@@ -1,6 +1,7 @@
 package com.example.softarex.dto;
 
 import javax.validation.constraints.NotBlank;
+
 import org.springframework.validation.annotation.Validated;
 
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FieldDto {
+
     private long id;
     @NotBlank
     private String label;

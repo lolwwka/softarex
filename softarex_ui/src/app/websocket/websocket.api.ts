@@ -4,7 +4,6 @@ import {ResponseTableComponent} from "../response_table/response_table.component
 
 export class WebSocketAPI {
   webSocketEndPoint: string = 'http://localhost:8080/softarex/ws';
-  topic: string = "/questionnaire/new";
   stompClient: any;
   responseTableComponent : ResponseTableComponent;
 
@@ -17,7 +16,7 @@ export class WebSocketAPI {
     this.stompClient = Stomp.over(ws);
     const _this = this;
     _this.stompClient.connect({}, function (frame : any) {
-      _this.stompClient.subscribe(_this.topic, function (sdkEvent : any) {
+      _this.stompClient.subscribe('/quest/new', function (sdkEvent : any) {
         _this.onMessageReceived(sdkEvent);
       });
       // _this.stompClient.reconnect_delay = 2000;
@@ -42,10 +41,10 @@ export class WebSocketAPI {
    * @param {*} message
    */
   _send(message : any) {
-    this.stompClient.send("/app/questionnaire/create", {}, JSON.stringify(message));
+    this.stompClient.send("/app/questionnaire/create/" + message, {}, JSON.stringify(message));
   }
 
   onMessageReceived(message : any) {
-    this.responseTableComponent.updateUserAnswers(message)
+    this.responseTableComponent.updateUserAnswers(JSON.parse(message.body))
   }
 }

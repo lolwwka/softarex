@@ -1,0 +1,31 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="convert-field-data" author="VaskovskyAS">
+        <update tableName="field">
+            <column name="type" value="SINGLE_LINE_TEXT" type="varchar"/>
+            <where>type = 'Single line text'</where>
+        </update>
+        <update tableName="field">
+            <column name="type" value="MULTILINE_TEXT" type="varchar"/>
+            <where>type = 'Multiline text'</where>
+        </update>
+        <update tableName="field">
+            <column name="type" value="RADIO_BUTTON" type="varchar"/>
+            <where>type = 'Radio button'</where>
+        </update>
+        <update tableName="field">
+            <column name="type" value="CHECKBOX" type="varchar"/>
+            <where>type = 'Checkbox'</where>
+        </update>
+        <update tableName="field">
+            <column name="type" value="COMBOBOX" type="varchar"/>
+            <where>type = 'Combobox'</where>
+        </update>
+        <update tableName="field">
+            <column name="type" value="DATE" type="varchar"/>
+            <where>type = 'Date'</where>
+        </update>
+    </changeSet>
+</databaseChangeLog>

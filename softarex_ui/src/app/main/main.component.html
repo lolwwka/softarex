@@ -44,6 +44,12 @@
             </tbody>
           </ng-container>
         </table>
+        <mat-paginator [length]="length"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="getServerData($event)"
+                       aria-label="Select page">
+        </mat-paginator>
       </div>
     </div>
   </div>

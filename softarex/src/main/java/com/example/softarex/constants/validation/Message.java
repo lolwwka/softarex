@@ -1,6 +1,7 @@
 package com.example.softarex.constants.validation;
 
 public interface Message {
+
     String PHONE = "Invalid phone input";
     String LAST_NAME = "Last name must include only letters";
     String FIRST_NAME = "First name must include only letters";

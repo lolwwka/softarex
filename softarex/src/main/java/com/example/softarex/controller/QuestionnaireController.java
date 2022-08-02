@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.softarex.constants.routs.QuestionnaireControllerRouts;
 import com.example.softarex.converter.FieldDtoConverter;
-import com.example.softarex.converter.UserAnswerDtoConverter;
 import com.example.softarex.dto.FieldDto;
-import com.example.softarex.dto.UserAnswerDto;
 import com.example.softarex.dto.UserQuestionnaireDto;
 import com.example.softarex.entity.Field;
 import com.example.softarex.entity.UserAnswer;
@@ -37,38 +35,42 @@ public class QuestionnaireController {
         this.questionnaireService = questionnaireService;
     }
 
-    @GetMapping(value = "/lastId")
-    private long getLastId(){
+    @GetMapping(value = QuestionnaireControllerRouts.LAST_ID)
+    private long getLastId() {
         return questionnaireService.getLastId();
     }
 
-    @GetMapping
-    private List<UserQuestionnaireDto> getAllUserAnswers(){
-        return questionnaireService.getAllUserAnswers();
+    @GetMapping(value = QuestionnaireControllerRouts.GET_ALL)
+    private List<UserAnswer> getAllUserAnswers(@PathVariable int offset, @PathVariable int limit) {
+        return questionnaireService.getAllUserAnswers(offset, limit);
     }
 
-    @GetMapping(value = "/{id}")
-    private List<FieldDto> getAllActiveFields(@PathVariable long id){
+    @GetMapping(value = QuestionnaireControllerRouts.TOTAL_NUM)
+    private long getQuestionnaireCount() {
+        return questionnaireService.getQuestionnaireCount();
+    }
+
+    @GetMapping(value = QuestionnaireControllerRouts.PATH_ID)
+    private List<FieldDto> getAllActiveFields(@PathVariable long id) {
         questionnaireService.checkExisting(id);
         List<FieldDto> dtoList = new ArrayList<>();
-        for (Field field : fieldService.getAllActive()){
+        for (Field field : fieldService.getAllActive()) {
             dtoList.add(FieldDtoConverter.convertFieldToDto(field));
         }
         return dtoList;
     }
 
-    @PostMapping(value = "/{id}")
-    private void createResponse(@PathVariable long id, @Valid @RequestBody List<UserAnswerDto> userAnswerList){
+    @PostMapping(value = QuestionnaireControllerRouts.PATH_ID)
+    private void createResponse(@PathVariable long id, @Valid @RequestBody UserQuestionnaireDto userAnswerList) {
         questionnaireService.checkExisting(id);
-        List<UserAnswer> userAnswers = new ArrayList<>();
-        userAnswerList.forEach(userAnswerDto ->{
-            if(userAnswerDto.getAnswer() == null  || userAnswerDto.getAnswer().equals("") && userAnswerDto.isRequired()){
+        userAnswerList.getUserCashAnswers().forEach(userAnswerDto -> {
+            if (userAnswerDto.getAnswer() == null || userAnswerDto.getAnswer().equals("") && userAnswerDto.isRequired()) {
                 throw new IncorrectQuestionnaireInputException(String.format("%s is required",
-                    fieldService.getField(userAnswerDto.getId()).getLabel()));
+                    fieldService.getField(userAnswerDto.getFieldId()).getLabel()));
             }
-            userAnswers.add(UserAnswerDtoConverter.convertUserAnswerDtoToUserAnswer(userAnswerDto,
-                fieldService.getField(userAnswerDto.getId()), id));
         });
-        userAnswers.forEach(questionnaireService::saveUserAnswer);
+        UserAnswer userAnswer = new UserAnswer();
+        userAnswer.setUserCashAnswer(userAnswerList.getUserCashAnswers());
+        questionnaireService.saveUserAnswer(userAnswer);
     }
 }

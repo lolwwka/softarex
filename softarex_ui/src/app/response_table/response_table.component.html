@@ -12,11 +12,17 @@
           </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let userAnswer of fixedUserAnswers">
-              <th *ngFor="let answer of userAnswer">{{answer}}</th>
+            <tr *ngFor="let userAnswer of userAnswers">
+              <th *ngFor="let answer of userAnswer">{{answer.answer}}</th>
             </tr>
           </tbody>
         </table>
+        <mat-paginator [length]="length"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="getNextServerData($event)"
+                       aria-label="Select page">
+        </mat-paginator>
       </div>
     </div>
   </div>

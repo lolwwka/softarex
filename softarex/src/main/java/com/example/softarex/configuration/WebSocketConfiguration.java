@@ -19,7 +19,7 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
     }
 
     public void configureMessageBroker(MessageBrokerRegistry confi) {
-        confi.enableSimpleBroker("/chat");
+        confi.enableSimpleBroker("/quest");
         confi.setApplicationDestinationPrefixes("/app");
     }
 

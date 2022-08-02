@@ -7,13 +7,12 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public enum FieldTypes {
-    SINGLE_LINE_TEXT("text"),
-    MULTILINE_TEXT("multiline"),
-    RADIO_BUTTON("radio"),
-    CHECKBOX("checkbox"),
-    COMBOBOX("combobox"),
-    DATE("date")
-    ;
+    SINGLE_LINE_TEXT("Single line text"),
+    MULTILINE_TEXT("Multiline text"),
+    RADIO_BUTTON("Radio button"),
+    CHECKBOX("Checkbox"),
+    COMBOBOX("Combobox"),
+    DATE("Date");
     @Setter
     private String htmlType;
 }

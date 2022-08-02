@@ -1,14 +1,13 @@
 package com.example.softarex.entity;
 
-import java.util.List;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import com.example.softarex.enums.field_types.FieldTypes;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,20 +18,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Field {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Field extends BaseEntity{
+
     @NotBlank
     private String label;
-    @NotBlank
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private FieldTypes type;
     private boolean required;
     private boolean active;
     private String options;
-    @OneToMany(
-        mappedBy = "field",
-        orphanRemoval = true
-    )
-    private List<UserAnswer> userAnswers;
 }

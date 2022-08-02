@@ -1,29 +1,27 @@
 package com.example.softarex.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.softarex.constants.routs.WebSocketRouts;
-import com.example.softarex.dto.UserAnswerDto;
-import com.example.softarex.dto.UserQuestionnaireDto;
+import com.example.softarex.entity.UserAnswer;
+import com.example.softarex.service.questionnaire.QuestionnaireService;
 
 @Controller
 public class WebSocketController {
 
+    private final QuestionnaireService questionnaireService;
+
+    public WebSocketController(QuestionnaireService questionnaireService) {
+        this.questionnaireService = questionnaireService;
+    }
+
     @MessageMapping(WebSocketRouts.FROM_ROUT)
     @SendTo(WebSocketRouts.TO_ROUT)
-    public UserQuestionnaireDto getNewQuestionnaire(List<UserAnswerDto> userAnswerList) throws InterruptedException {
-        Thread.sleep(1000);
-        UserQuestionnaireDto userQuestionnaireDto = new UserQuestionnaireDto();
-        List<String> userAnswers = new ArrayList<>();
-        userAnswerList.forEach(userAnswer ->{
-            userAnswers.add(userAnswer.getAnswer());
-        });
-        userQuestionnaireDto.setUserAnswers(userAnswers);
-        return userQuestionnaireDto;
+    public UserAnswer getNewQuestionnaire(@PathVariable long id) throws InterruptedException {
+        Thread.sleep(5000);
+        return questionnaireService.get(id);
     }
 }

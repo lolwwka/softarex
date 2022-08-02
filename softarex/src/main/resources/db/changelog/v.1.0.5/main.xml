@@ -2,24 +2,18 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet id="modify-table-field" author="VaskovskyAS">
-        <createTable tableName="field">
+    <changeSet id="create-user-answers-and-modify-field" author="VaskovskyAS">
+        <createTable tableName="user_answer">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="label" type="varchar">
-                <constraints nullable="false"/>
+            <column name="answer" type="varchar"/>
+            <column name="field_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="user_answer_field_id_id" references="field(id)"/>
             </column>
-            <column name="type" type="varchar">
-                <constraints nullable="false"/>
-            </column>
-            <column name="required" type="boolean">
-                <constraints nullable="false"/>
-            </column>
-            <column name="active" type="boolean">
+            <column name="user_questionnaire_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-
 </databaseChangeLog>

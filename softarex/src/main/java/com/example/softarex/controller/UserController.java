@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.softarex.constants.routs.UserControllerRouts;
 import com.example.softarex.converter.UserDtoConverter;
 import com.example.softarex.dto.NewPassDto;
 import com.example.softarex.dto.UserDto;
 import com.example.softarex.entity.User;
-import com.example.softarex.constants.routs.UserControllerRouts;
 import com.example.softarex.service.user.UserService;
 
 @RestController
@@ -37,12 +37,12 @@ public class UserController {
         return userDto;
     }
 
-    @PutMapping(value = "/{id}" + UserControllerRouts.PASS_CHANGE)
+    @PutMapping(value = UserControllerRouts.PASS_CHANGE)
     public void updateUserPass(@PathVariable long id, @Valid @RequestBody NewPassDto newPassDto) throws RuntimeException, MessagingException {
         userService.changePass(id, newPassDto.getCurrentPass(), newPassDto.getNewPass());
     }
 
-    @PostMapping(value = "/" + UserControllerRouts.PASS_RECOVERY  + "/{email}")
+    @PostMapping(value = UserControllerRouts.PASS_RECOVERY)
     public Boolean recoverPass(@PathVariable String email) throws RuntimeException, MessagingException {
         userService.recoverPass(email);
         return Boolean.TRUE;
